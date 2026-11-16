@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Submitted Successfully</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; 
+            color: #333; 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); 
+            color: white; 
+            padding: 30px; 
+            text-align: center; 
+            border-radius: 10px 10px 0 0; 
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content { 
+            padding: 30px; 
+            background: #f9f9f9; 
+            border-radius: 0 0 10px 10px; 
+        }
+        .report-details { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 5px; 
+            border-left: 4px solid #4CAF50; 
+            margin: 20px 0; 
+        }
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #555;
+            width: 150px;
+            flex-shrink: 0;
+        }
+        .detail-value {
+            color: #222;
+            flex: 1;
+        }
+        .status-badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .footer { 
+            text-align: center; 
+            margin-top: 30px; 
+            padding-top: 20px; 
+            border-top: 1px solid #ddd; 
+            color: #666; 
+            font-size: 12px; 
+        }
+        .button {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            margin: 15px 0;
+        }
+        .description-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        .category-icon {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚧 Report Submitted Successfully!</h1>
+            <p>Thank you for helping improve road safety</p>
+        </div>
+        
+        <div class="content">
+            <p>Hello <strong>{{name}}</strong>,</p>
+            <p>Your road issue report has been successfully submitted and is now under review by our team.</p>
+            
+            <div class="report-details">
+                <h3 style="margin-top: 0; color: #2e7d32;">📋 Report Details:</h3>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Report ID:</div>
+                    <div class="detail-value"><strong>#{{reportId}}</strong></div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Title:</div>
+                    <div class="detail-value">{{title}}</div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Category:</div>
+                    <div class="detail-value">
+                        {{#ifEquals category "pothole"}}<span class="category-icon">🕳️</span> Pothole{{/ifEquals}}
+                        {{#ifEquals category "drainage"}}<span class="category-icon">💧</span> Drainage{{/ifEquals}}
+                        {{#ifEquals category "lighting"}}<span class="category-icon">💡</span> Street Lighting{{/ifEquals}}
+                        {{#ifEquals category "garbage"}}<span class="category-icon">🗑️</span> Garbage{{/ifEquals}}
+                        {{#ifEquals category "signage"}}<span class="category-icon">🪧</span> Road Signage{{/ifEquals}}
+                        {{#ifEquals category "other"}}<span class="category-icon">📝</span> Other Issue{{/ifEquals}}
+                        {{#unless category}}Not specified{{/unless}}
+                    </div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Severity:</div>
+                    <div class="detail-value">
+                        {{#ifEquals severity "high"}}🔴 High{{/ifEquals}}
+                        {{#ifEquals severity "medium"}}🟡 Medium{{/ifEquals}}
+                        {{#ifEquals severity "low"}}🟢 Low{{/ifEquals}}
+                        {{#unless severity}}Medium{{/unless}}
+                    </div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Location:</div>
+                    <div class="detail-value">{{address}}</div>
+                </div>
+                
+                {{#if landmark}}
+                <div class="detail-row">
+                    <div class="detail-label">Landmark:</div>
+                    <div class="detail-value">{{landmark}}</div>
+                </div>
+                {{/if}}
+                
+                {{#if ward}}
+                <div class="detail-row">
+                    <div class="detail-label">Ward:</div>
+                    <div class="detail-value">{{ward}}</div>
+                </div>
+                {{/if}}
+                
+                {{#if zone}}
+                <div class="detail-row">
+                    <div class="detail-label">Zone:</div>
+                    <div class="detail-value">{{zone}}</div>
+                </div>
+                {{/if}}
+                
+                <div class="detail-row">
+                    <div class="detail-label">Submitted on:</div>
+                    <div class="detail-value">{{date}}</div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Status:</div>
+                    <div class="detail-value">
+                        <span class="status-badge">⏳ Pending Review</span>
+                    </div>
+                </div>
+            </div>
+            
+            {{#if description}}
+            <div class="description-box">
+                <strong>Your Description:</strong><br>
+                "{{description}}"
+            </div>
+            {{/if}}
+            
+            <p><strong>📅 What happens next?</strong></p>
+            <ul>
+                <li>Our team will review your report within <strong>24 hours</strong></li>
+                <li>You'll receive updates on status changes</li>
+                <li>Once approved, it will be assigned to the appropriate department</li>
+                <li>You can track progress in your dashboard</li>
+            </ul>
+            
+            <div style="text-align: center; margin: 25px 0;">
+                <a href="{{appUrl}}/dashboard/reports/{{reportId}}" class="button">
+                    🚀 Track Your Report
+                </a>
+            </div>
+            
+            <p>Need to add more details or images? <br>
+            Reply to this email or visit your report page to add updates.</p>
+            
+            <p>Thank you for being a responsible citizen and helping make our roads safer! 🛣️</p>
+            
+            <p>Best regards,<br>
+            <strong>The Smart Road Management Team</strong><br>
+            <a href="mailto:{{supportEmail}}">{{supportEmail}}</a></p>
+        </div>
+        
+        <div class="footer">
+            <p>© {{year}} {{appName}}. All rights reserved.</p>
+            <p>This is an automated message. Please do not reply to this email.</p>
+            <p>Report ID: #{{reportId}}</p>
+        </div>
+    </div>
+</body>
+</html>
